@@ -1,1 +1,3 @@
-addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % sys.props("plugin.version"))
+addSbtPlugin(
+  sys.props("plugin.org") % "sbt-scalafix" % sys.props("plugin.version")
+)
