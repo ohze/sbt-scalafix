@@ -39,7 +39,7 @@ val fansiV = Def.setting {
 }
 libraryDependencies ++= List(
   "com.lihaoyi" %% "fansi" % fansiV.value % Test,
-  "org.scalatest" %% "scalatest" % "3.1.0" % Test
+  "org.scalatest" %% "scalatest" % "3.1.1" % Test
 )
 
 // Cross-building settings (see https://github.com/sbt/sbt/issues/3473#issuecomment-325729747)
