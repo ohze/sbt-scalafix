@@ -2,10 +2,10 @@ import sbt._
 
 object Dependencies {
   val x = List(1) // scalafix:ok
-  def scalafixVersion: String = "0.9.14"
+  def scalafixVersion: String = "0.9.14.1"
   val all = List(
     "org.eclipse.jgit" % "org.eclipse.jgit" % "5.7.0.202003110725-r",
-    "ch.epfl.scala" % "scalafix-interfaces" % scalafixVersion,
+    "com.sandinh" % "scalafix-interfaces" % scalafixVersion,
     // coursier-small provides a binary stable API around Coursier making sure that
     // sbt-scalafix doesn't conflict with the user's installed version of sbt-coursier.
     // Details: https://github.com/olafurpg/coursier-small
