@@ -75,5 +75,6 @@ sbtPlugin := true
 scriptedBufferLog := false
 scriptedLaunchOpts ++= Seq(
   "-Xmx2048M",
+  s"-Dplugin.org=${organization.value}",
   s"-Dplugin.version=${version.value}"
 )
