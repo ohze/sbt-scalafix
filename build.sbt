@@ -34,8 +34,11 @@ commands += Command.command("ci-windows") { s =>
 // Dependencies
 resolvers += Resolver.sonatypeRepo("public")
 libraryDependencies ++= Dependencies.all
+val fansiV = Def.setting {
+  if (scalaBinaryVersion.value == "2.10") "0.2.6" else "0.2.9"
+}
 libraryDependencies ++= List(
-  "com.lihaoyi" %% "fansi" % "0.2.6" % Test,
+  "com.lihaoyi" %% "fansi" % fansiV.value % Test,
   "org.scalatest" %% "scalatest" % "3.1.0" % Test
 )
 
