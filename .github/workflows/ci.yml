@@ -5,11 +5,33 @@ jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         java: [ adopt@1.8, adopt@1.11 ]
     name: test on ${{ matrix.java }}
     steps:
       - uses: actions/checkout@v2
+      - name: Cache ivy
+        uses: pat-s/always-upload-cache@v1
+        with:
+          path: ~/.ivy2/cache
+          key: ivy-${{ hashFiles('**/build.sbt') }}-${{ hashFiles('project/*.scala') }}
+          restore-keys: |
+            ivy--
+      - name: Cache sbt
+        uses: pat-s/always-upload-cache@v1
+        with:
+          path: ~/.sbt
+          key: sbt-${{ hashFiles('**/build.sbt') }}-${{ hashFiles('project/*.scala') }}
+          restore-keys: |
+            sbt--
+      - name: Cache coursier
+        uses: pat-s/always-upload-cache@v1
+        with:
+          path: ~/.coursier
+          key: coursier-${{ hashFiles('**/build.sbt') }}-${{ hashFiles('project/*.scala') }}
+          restore-keys: |
+            coursier--
       - uses: olafurpg/setup-scala@v7
         with:
           java-version: ${{ matrix.java }}
