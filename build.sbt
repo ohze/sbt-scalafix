@@ -10,8 +10,8 @@ onLoadMessage := s"Welcome to sbt-scalafix ${version.value}"
 moduleName := "sbt-scalafix"
 
 // Publish settings
-organization := "ch.epfl.scala"
-homepage := Some(url("https://github.com/scalacenter/sbt-scalafix"))
+organization := "com.sandinh"
+homepage := Some(url("https://github.com/ohze/sbt-scalafix"))
 licenses := List(
   "Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")
 )
