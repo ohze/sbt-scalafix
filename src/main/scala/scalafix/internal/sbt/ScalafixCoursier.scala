@@ -13,7 +13,7 @@ import scala.collection.JavaConverters._
 
 object ScalafixCoursier {
   private def scalafixCliModule: Module = Module.of(
-    "ch.epfl.scala",
+    classOf[scalafix.interfaces.Scalafix].getPackage.getImplementationVendor,
     s"scalafix-cli_${BuildInfo.scala212}"
   )
   private def scalafixCli: Dependency = Dependency.of(
