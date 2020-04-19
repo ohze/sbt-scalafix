@@ -108,7 +108,7 @@ class SbtCompletionsSuite extends AnyFunSuite {
          |""".stripMargin.trim.replaceAll("\r\n", "\n")
     if (obtained != expected) {
       println("\"\"\"|")
-      obtained.lines.foreach { line =>
+      obtained.linesIterator.foreach { line =>
         print("   |")
         println(line)
       }
