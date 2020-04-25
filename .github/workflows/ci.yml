@@ -6,24 +6,33 @@ on:
   pull_request:
 jobs:
   test:
-    name: ${{ matrix.command }}
+    name: ${{ matrix.command }} / on ${{ matrix.java }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
+        java: [ adopt@1.8, adopt@1.11 ]
         command:
           - "++2.12.11 test scripted"
           - "++2.10.7 test 'scripted sbt-scalafix/*'"
     steps:
       - uses: actions/checkout@v2
       - uses: olafurpg/setup-scala@v7
+        with:
+          java-version: ${{ matrix.java }}
       - run: sbt ${{ matrix.command }}
   windows:
-    name: Windows tests
+    name: Windows tests / on ${{ matrix.java }}
     runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        java: [ adopt@1.8, adopt@1.11 ]
     steps:
       - uses: actions/checkout@v2
       - uses: olafurpg/setup-scala@v7
+        with:
+          java-version: ${{ matrix.java }}
       - run: sbt ci-windows
         shell: bash
   checks:
