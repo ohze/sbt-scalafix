@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - ohze
   pull_request:
 jobs:
   test:
