@@ -22,9 +22,14 @@
 
 > javaProject/compile:scalafix ProcedureSyntax
 # Should fail because 2.10 has no semanticdb
+-> scala210/compile:scalafix
+-> scala210/test:scalafix
 # Other >2.10 projects should succeed
--> compile:scalafix
--> test:scalafix
+> javaProject/compile:scalafix
+> javaProject/test:scalafix
+> scala211/compile:scalafix
+> scala211/test:scalafix
+
 # it config exists only for 2.12
 > it:scalafix
 
