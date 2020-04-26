@@ -12,14 +12,19 @@ lazy val scalafixSettings = List(
   scalacOptions += "-Yrangepos"
 )
 
+def jdkVersion: Int = {
+  // format of v is "1.n" for java 1.8- and "n" for java 9+
+  val v = sys.props("java.specification.version")
+  v.substring(v.lastIndexOf('.') + 1).toInt
+}
+
+lazy val scala210Ref: Seq[ProjectReference] =
+  if (jdkVersion > 8) Nil else Seq[ProjectReference](scala210)
+
 lazy val root = project
   .in(file("."))
-  .aggregate(
-    javaProject,
-    scala211,
-    scala210,
-    scala212
-  )
+  .aggregate(javaProject, scala211, scala212)
+  .aggregate(scala210Ref: _*)
 
 lazy val scala210 = project.settings(
   scalaVersion := "2.10.5"
