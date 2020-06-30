@@ -17,7 +17,7 @@ class JGitCompletion(cwd: Path) {
     RepositoryCache.FileKey
       .isGitRepository(cwd.resolve(DOT_GIT).toFile, FS.DETECTED)
 
-  private val (refList, refs) =
+  private lazy val (refList, refs) =
     if (isGitRepository) {
       val builder = new FileRepositoryBuilder()
       val repo = builder.readEnvironment().setWorkTree(cwd.toFile).build()
@@ -30,13 +30,13 @@ class JGitCompletion(cwd: Path) {
       (Nil, Nil)
     }
 
-  val branchesAndTags: List[String] =
+  lazy val branchesAndTags: List[String] =
     refList.map { ref => Repository.shortenRefName(ref.getName) }.toList
 
   private val dateFormatter = new GitDateFormatter(
     GitDateFormatter.Format.RELATIVE
   )
-  val last20Commits: List[(String, String)] =
+  lazy val last20Commits: List[(String, String)] =
     refs.map { ref =>
       val relativeCommitTime =
         dateFormatter.formatDate(refs.head.getCommitterIdent)
